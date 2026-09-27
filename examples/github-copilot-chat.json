@@ -1,0 +1,80 @@
+{
+  "version": 3,
+  "requesterUsername": "example-dev",
+  "responderUsername": "GitHub Copilot",
+  "initialLocation": "panel",
+  "sessionId": "copilot-session-0001",
+  "creationDate": 1786114800000,
+  "lastMessageDate": 1786115340000,
+  "customTitle": "Add pagination to the orders API",
+  "requests": [
+    {
+      "requestId": "request_0001",
+      "timestamp": 1786114800000,
+      "modelId": "copilot/claude-sonnet-4",
+      "message": {
+        "text": "Add cursor-based pagination to GET /orders",
+        "parts": [
+          {
+            "text": "Add cursor-based pagination to GET /orders",
+            "kind": "text"
+          }
+        ]
+      },
+      "response": [
+        {
+          "kind": "progressTaskSerialized",
+          "content": {
+            "value": "Optimizing tool selection..."
+          }
+        },
+        {
+          "kind": "prepareToolInvocation",
+          "toolName": "copilot_readFile"
+        },
+        {
+          "kind": "toolInvocationSerialized",
+          "toolId": "copilot_readFile",
+          "toolCallId": "call-1",
+          "invocationMessage": {
+            "value": "Reading orders.ts"
+          },
+          "isComplete": true
+        },
+        {
+          "value": "I'll add a `cursor` query parameter and return `nextCursor`:\n\n```typescript\nconst page = await db.orders.findMany({ take: 50, cursor: cursor ? { id: cursor } : undefined });\n```",
+          "supportThemeIcons": false,
+          "supportHtml": false
+        }
+      ],
+      "result": {
+        "timings": {
+          "firstProgress": 900,
+          "totalElapsed": 14200
+        }
+      }
+    },
+    {
+      "requestId": "request_0002",
+      "timestamp": 1786115160000,
+      "modelId": "copilot/gpt-4.1",
+      "message": {
+        "text": "Still doesn't work, the last page repeats the first item",
+        "parts": []
+      },
+      "response": [
+        {
+          "value": "You're right — the cursor row itself is included again. Add `skip: 1` when a cursor is present.",
+          "supportThemeIcons": false,
+          "supportHtml": false
+        }
+      ],
+      "result": {
+        "timings": {
+          "firstProgress": 700,
+          "totalElapsed": 5100
+        }
+      }
+    }
+  ]
+}

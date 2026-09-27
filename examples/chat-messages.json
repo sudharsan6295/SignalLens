@@ -1,0 +1,65 @@
+[
+  {
+    "id": "owui-0001",
+    "title": "Summarise the incident report",
+    "created_at": 1786446000,
+    "updated_at": 1786446120,
+    "chat": {
+      "models": [
+        "llama3.1:8b"
+      ],
+      "messages": [
+        {
+          "id": "m1",
+          "role": "user",
+          "content": "Summarise this incident report in three bullet points.",
+          "timestamp": 1786446000
+        },
+        {
+          "id": "m2",
+          "role": "assistant",
+          "content": "- Checkout was down 42 minutes\n- Cause: expired TLS certificate\n- Fix: automated renewal alerts",
+          "timestamp": 1786446020,
+          "model": "llama3.1:8b"
+        }
+      ]
+    }
+  },
+  {
+    "id": "owui-0002",
+    "title": "Regex for invoice numbers",
+    "created_at": 1786532400,
+    "updated_at": 1786532600,
+    "chat": {
+      "models": [
+        "llama3.1:8b"
+      ],
+      "messages": [
+        {
+          "id": "m3",
+          "role": "system",
+          "content": "You are a helpful assistant.",
+          "timestamp": 1786532400
+        },
+        {
+          "id": "m4",
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "Write a regex for invoice numbers like INV-2026-00042"
+            }
+          ],
+          "timestamp": 1786532400
+        },
+        {
+          "id": "m5",
+          "role": "assistant",
+          "content": "```\n^INV-\\d{4}-\\d{5}$\n```",
+          "timestamp": 1786532415,
+          "model": "llama3.1:8b"
+        }
+      ]
+    }
+  }
+]

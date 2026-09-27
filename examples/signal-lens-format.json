@@ -1,0 +1,79 @@
+{
+  "format": "signal-lens/v1",
+  "exportedAt": "2026-08-20T12:00:00.000Z",
+  "conversations": [
+    {
+      "id": "support-bot-0001",
+      "source": "support-bot",
+      "title": "Refund question",
+      "project": "Helpdesk",
+      "model": "claude-haiku-4-5",
+      "createdAt": "2026-08-18T09:00:00.000Z",
+      "updatedAt": "2026-08-18T09:01:30.000Z",
+      "messages": [
+        {
+          "role": "user",
+          "text": "Can I get a refund after 45 days?",
+          "at": "2026-08-18T09:00:00.000Z"
+        },
+        {
+          "role": "assistant",
+          "text": "Refunds are available within 30 days of delivery, so 45 days isn't eligible — but you can exchange within 60 days.",
+          "at": "2026-08-18T09:00:04.000Z",
+          "model": "claude-haiku-4-5",
+          "usage": {
+            "input": 240,
+            "output": 61,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "support-bot-0002",
+      "source": "support-bot",
+      "title": "Wrong size delivered",
+      "project": "Helpdesk",
+      "model": "claude-haiku-4-5",
+      "createdAt": "2026-08-19T15:20:00.000Z",
+      "updatedAt": "2026-08-19T15:22:00.000Z",
+      "messages": [
+        {
+          "role": "user",
+          "text": "I got the wrong size.",
+          "at": "2026-08-19T15:20:00.000Z"
+        },
+        {
+          "role": "assistant",
+          "text": "Sorry about that — here's a prepaid return label.",
+          "at": "2026-08-19T15:20:03.000Z",
+          "model": "claude-haiku-4-5",
+          "usage": {
+            "input": 180,
+            "output": 40,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          }
+        },
+        {
+          "role": "user",
+          "text": "That's not what I asked, I want an exchange.",
+          "at": "2026-08-19T15:21:00.000Z"
+        },
+        {
+          "role": "assistant",
+          "text": "You're right — I've set up an exchange for the correct size instead.",
+          "at": "2026-08-19T15:21:04.000Z",
+          "model": "claude-haiku-4-5",
+          "usage": {
+            "input": 260,
+            "output": 35,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          }
+        }
+      ]
+    }
+  ]
+}

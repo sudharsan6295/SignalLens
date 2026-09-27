@@ -1,0 +1,5 @@
+timestamp,app,prompt,response,model,input_tokens,output_tokens
+2026-08-12T09:00:00Z,Perplexity,Latest pricing for Snowflake vs BigQuery?,Snowflake bills per-second compute credits; BigQuery charges per TB scanned or flat-rate slots.,,,
+2026-08-12T09:03:00Z,Perplexity,Which is cheaper for 2 TB/month of ad-hoc queries?,"BigQuery on-demand, at roughly 2 TB × list price, unless queries scan far more than they return.",,,
+2026-08-13T16:00:00Z,HR assistant,How many leave days carry over to next year?,Up to 5 unused days carry over and must be used by 31 March.,claude-haiku-4-5,420,38
+2026-08-14T13:00:00Z,HR assistant,"My employee email is sam.taylor@example.com, update my address",I can't help with changing personal records — please use the HR portal.,claude-haiku-4-5,390,30

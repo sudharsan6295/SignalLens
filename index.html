@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Signal Lens — your AI conversations, measured</title>
+<meta name="description" content="Analyze your Claude, ChatGPT, Gemini, Microsoft 365 Copilot, GitHub Copilot, Cursor and Claude Code history in your browser. Usage, topics, quality signals, sensitive data and cost — no upload, no AI.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='12' cy='16' r='9' fill='%232a78d6'/><circle cx='20' cy='16' r='9' fill='%23eb6834' fill-opacity='.85'/></svg>">
+<!-- Apply the saved theme before first paint, so there's no light/dark flash. -->
+<script>
+  (function () {
+    try {
+      var s = JSON.parse(localStorage.getItem("lens.settings") || "{}");
+      if (s.theme && s.theme !== "system") document.documentElement.setAttribute("data-theme", s.theme);
+      if (s.density) document.documentElement.setAttribute("data-density", s.density);
+      if (s.motion && s.motion !== "system") document.documentElement.setAttribute("data-motion", s.motion);
+    } catch (e) { /* storage blocked: defaults apply */ }
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/charts.css">
+<link rel="stylesheet" href="css/dark-fx.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="topbar" role="banner">
+  <a class="brand" href="#overview" aria-label="Signal Lens, back to top">
+    <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><circle cx="12" cy="16" r="9" class="bm-you"/><circle cx="20" cy="16" r="9" class="bm-claude"/></svg>
+    <span class="brand-name">Signal <b>Lens</b></span>
+  </a>
+
+  <div class="search" id="search">
+    <svg class="search-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg>
+    <input id="searchInput" type="search" autocomplete="off" spellcheck="false"
+           placeholder="Search conversations, topics, actions"
+           role="combobox" aria-expanded="false" aria-controls="searchList" aria-autocomplete="list"
+           aria-label="Search conversations, topics and actions">
+    <kbd class="search-kbd" aria-hidden="true">/</kbd>
+    <ul class="search-list" id="searchList" role="listbox" aria-label="Suggestions" hidden></ul>
+  </div>
+
+  <div class="topbar-actions">
+    <span class="pill pill-live" id="livePill" hidden><span class="dot"></span><span id="livePillText">Live</span></span>
+    <span class="pill pill-sample" id="samplePill" hidden>Sample data</span>
+    <button class="btn btn-icon" id="themeQuick" type="button" aria-label="Switch theme" title="Switch theme">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3a7 7 0 1 0 7 7 5.5 5.5 0 0 1-7-7z"/></svg>
+    </button>
+    <button class="btn btn-icon" id="openSettings" type="button" aria-label="Settings and layout" title="Settings and layout">
+      <svg viewBox="0 0 20 20" aria-hidden="true">
+        <line x1="5" y1="4" x2="5" y2="16"/><circle cx="5" cy="8" r="1.7"/>
+        <line x1="10" y1="4" x2="10" y2="16"/><circle cx="10" cy="13" r="1.7"/>
+        <line x1="15" y1="4" x2="15" y2="16"/><circle cx="15" cy="6.5" r="1.7"/>
+      </svg>
+    </button>
+    <button class="btn btn-primary btn-cta" id="openImport" type="button">Import data</button>
+  </div>
+</header>
+
+
+<div class="shell">
+  <nav class="sidebar" id="sidebar" aria-label="Sections">
+    <ul id="navList"></ul>
+    <p class="sidebar-foot">Files are read in this browser.<br>Nothing is uploaded.</p>
+  </nav>
+
+  <main id="main" tabindex="-1">
+    <div class="filterbar" id="filterbar" role="region" aria-label="Filters" hidden></div>
+    <div id="view"></div>
+
+    <footer class="site-footer">
+      <p>Author — <a href="https://sudharsanbalaji.com" target="_blank" rel="noopener">sudharsanbalaji.com</a></p>
+      <p>Privacy — everything stays in this browser; nothing is stored or sent anywhere else.</p>
+    </footer>
+  </main>
+</div>
+
+<!-- Drill-down / conversation drawer -->
+<aside class="drawer" id="drawer" aria-hidden="true" aria-labelledby="drawerTitle" role="dialog" aria-modal="false" tabindex="-1">
+  <div class="drawer-head">
+    <button class="btn btn-icon" id="drawerBack" type="button" aria-label="Back to list" hidden>
+      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12 4l-6 6 6 6"/></svg>
+    </button>
+    <div class="drawer-titles">
+      <h2 id="drawerTitle"></h2>
+      <p id="drawerSub"></p>
+    </div>
+    <button class="btn btn-icon" id="drawerClose" type="button" aria-label="Close panel">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg>
+    </button>
+  </div>
+  <div class="drawer-body" id="drawerBody"></div>
+</aside>
+<div class="scrim" id="scrim" hidden></div>
+
+<dialog class="modal" id="importDialog" aria-labelledby="importTitle"></dialog>
+<dialog class="modal modal-wide" id="settingsDialog" aria-labelledby="settingsTitle"></dialog>
+
+<div class="drop-overlay" id="dropOverlay" hidden><div>Drop to import<small>.zip · .json · .jsonl · .md · .csv</small></div></div>
+<div class="progress" id="progress" hidden><div class="progress-bar" id="progressBar"></div></div>
+<div class="tip" id="tip" aria-hidden="true" hidden></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="sr-only" id="announcer" aria-live="polite"></div>
+
+<!-- Classic scripts in dependency order (works from file:// with no build step).
+     Each file adds one module to the global `Lens` namespace. -->
+<script src="js/core/lens.js"></script>
+<script src="js/core/db.js"></script>
+<script src="js/core/store.js"></script>
+<script src="js/data/zip.js"></script>
+<script src="js/data/adapters.js"></script>
+<script src="js/data/adapters-extra.js"></script>
+<script src="js/data/sample.js"></script>
+<script src="js/analytics/text.js"></script>
+<script src="js/analytics/pricing.js"></script>
+<script src="js/analytics/enrich.js"></script>
+<script src="js/analytics/metrics.js"></script>
+<script src="js/data/sources.js"></script>
+<script src="js/charts/charts.js"></script>
+<script src="js/ui/drawer.js"></script>
+<script src="js/ui/grid.js"></script>
+<script src="js/ui/widgets/overview.js"></script>
+<script src="js/ui/widgets/activity.js"></script>
+<script src="js/ui/widgets/content.js"></script>
+<script src="js/ui/widgets/quality.js"></script>
+<script src="js/ui/widgets/alerts.js"></script>
+<script src="js/ui/widgets/notes.js"></script>
+<script src="js/ui/filters.js"></script>
+<script src="js/ui/search.js"></script>
+<script src="js/ui/import.js"></script>
+<script src="js/ui/settings.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

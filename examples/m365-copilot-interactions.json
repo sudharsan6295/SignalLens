@@ -1,0 +1,253 @@
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#Collection(microsoft.graph.aiInteraction)",
+  "value": [
+    {
+      "id": "1788000000001",
+      "sessionId": "19:bizchat-0001@thread.v2",
+      "requestId": "req-1",
+      "appClass": "IPM.SkypeTeams.Message.Copilot.BizChat",
+      "interactionType": "userPrompt",
+      "conversationType": "bizchat",
+      "etag": "1788000000001",
+      "createdDateTime": "2026-08-05T10:00:00.000Z",
+      "locale": "en-us",
+      "contexts": [],
+      "from": {
+        "@odata.type": "#microsoft.graph.chatMessageFromIdentitySet",
+        "device": null,
+        "user": {
+          "id": "user-0001",
+          "displayName": "Example User",
+          "userIdentityType": "aadUser"
+        },
+        "application": null
+      },
+      "body": {
+        "contentType": "text",
+        "content": "What should be on my radar from emails last week?"
+      },
+      "attachments": [],
+      "links": [],
+      "mentions": []
+    },
+    {
+      "id": "1788000000002",
+      "sessionId": "19:bizchat-0001@thread.v2",
+      "requestId": "req-1",
+      "appClass": "IPM.SkypeTeams.Message.Copilot.BizChat",
+      "interactionType": "aiResponse",
+      "conversationType": "bizchat",
+      "etag": "1788000000002",
+      "createdDateTime": "2026-08-05T10:00:06.000Z",
+      "locale": "en-us",
+      "contexts": [],
+      "from": {
+        "@odata.type": "#microsoft.graph.chatMessageFromIdentitySet",
+        "device": null,
+        "user": null,
+        "application": {
+          "id": "app-0001",
+          "displayName": "Microsoft 365 Chat",
+          "applicationIdentityType": "bot"
+        }
+      },
+      "body": {
+        "contentType": "html",
+        "content": "<attachment id=\"card-2\"></attachment>"
+      },
+      "attachments": [
+        {
+          "attachmentId": "card-2",
+          "contentType": "application/vnd.microsoft.card.adaptive",
+          "contentUrl": null,
+          "name": null,
+          "content": "{\"type\": \"AdaptiveCard\", \"version\": \"1.0\", \"body\": [{\"type\": \"TextBlock\", \"text\": \"Three things need you: the vendor contract renewal (due Friday), the Q3 budget review invite, and a customer escalation from Acme. [1](https://example.com/doc)\", \"wrap\": true}, {\"type\": \"TextBlock\", \"id\": \"MessageTextField\", \"text\": \"Three things need you: the vendor contract renewal (due Friday), the Q3 budget review invite, and a customer escalation from Acme.\", \"wrap\": true}]}"
+        }
+      ],
+      "links": [],
+      "mentions": []
+    },
+    {
+      "id": "1788000000003",
+      "sessionId": "19:bizchat-0001@thread.v2",
+      "requestId": "req-2",
+      "appClass": "IPM.SkypeTeams.Message.Copilot.BizChat",
+      "interactionType": "userPrompt",
+      "conversationType": "bizchat",
+      "etag": "1788000000003",
+      "createdDateTime": "2026-08-05T10:02:00.000Z",
+      "locale": "en-us",
+      "contexts": [],
+      "from": {
+        "@odata.type": "#microsoft.graph.chatMessageFromIdentitySet",
+        "device": null,
+        "user": {
+          "id": "user-0001",
+          "displayName": "Example User",
+          "userIdentityType": "aadUser"
+        },
+        "application": null
+      },
+      "body": {
+        "contentType": "text",
+        "content": "That's wrong, the budget review was cancelled. Try again."
+      },
+      "attachments": [],
+      "links": [],
+      "mentions": []
+    },
+    {
+      "id": "1788000000004",
+      "sessionId": "19:bizchat-0001@thread.v2",
+      "requestId": "req-2",
+      "appClass": "IPM.SkypeTeams.Message.Copilot.BizChat",
+      "interactionType": "aiResponse",
+      "conversationType": "bizchat",
+      "etag": "1788000000004",
+      "createdDateTime": "2026-08-05T10:02:05.000Z",
+      "locale": "en-us",
+      "contexts": [],
+      "from": {
+        "@odata.type": "#microsoft.graph.chatMessageFromIdentitySet",
+        "device": null,
+        "user": null,
+        "application": {
+          "id": "app-0001",
+          "displayName": "Microsoft 365 Chat",
+          "applicationIdentityType": "bot"
+        }
+      },
+      "body": {
+        "contentType": "html",
+        "content": "<attachment id=\"card-4\"></attachment>"
+      },
+      "attachments": [
+        {
+          "attachmentId": "card-4",
+          "contentType": "application/vnd.microsoft.card.adaptive",
+          "contentUrl": null,
+          "name": null,
+          "content": "{\"type\": \"AdaptiveCard\", \"version\": \"1.0\", \"body\": [{\"type\": \"TextBlock\", \"text\": \"You're right \\u2014 the budget review was cancelled on Tuesday. Remaining: the contract renewal and the Acme escalation. [1](https://example.com/doc)\", \"wrap\": true}, {\"type\": \"TextBlock\", \"id\": \"MessageTextField\", \"text\": \"You're right \\u2014 the budget review was cancelled on Tuesday. Remaining: the contract renewal and the Acme escalation.\", \"wrap\": true}]}"
+        }
+      ],
+      "links": [],
+      "mentions": []
+    },
+    {
+      "id": "1788000000005",
+      "sessionId": "19:meeting-0002@thread.v2",
+      "requestId": "req-3",
+      "appClass": "IPM.SkypeTeams.Message.Copilot.Teams",
+      "interactionType": "userPrompt",
+      "conversationType": "appchat",
+      "etag": "1788000000005",
+      "createdDateTime": "2026-08-06T15:00:00.000Z",
+      "locale": "en-us",
+      "contexts": [],
+      "from": {
+        "@odata.type": "#microsoft.graph.chatMessageFromIdentitySet",
+        "device": null,
+        "user": {
+          "id": "user-0001",
+          "displayName": "Example User",
+          "userIdentityType": "aadUser"
+        },
+        "application": null
+      },
+      "body": {
+        "contentType": "text",
+        "content": "Summarise the decisions from this meeting"
+      },
+      "attachments": [],
+      "links": [],
+      "mentions": []
+    },
+    {
+      "id": "1788000000006",
+      "sessionId": "19:meeting-0002@thread.v2",
+      "requestId": "req-3",
+      "appClass": "IPM.SkypeTeams.Message.Copilot.Teams",
+      "interactionType": "aiResponse",
+      "conversationType": "appchat",
+      "etag": "1788000000006",
+      "createdDateTime": "2026-08-06T15:00:08.000Z",
+      "locale": "en-us",
+      "contexts": [],
+      "from": {
+        "@odata.type": "#microsoft.graph.chatMessageFromIdentitySet",
+        "device": null,
+        "user": null,
+        "application": {
+          "id": "app-0001",
+          "displayName": "Microsoft 365 Chat",
+          "applicationIdentityType": "bot"
+        }
+      },
+      "body": {
+        "contentType": "text",
+        "content": "Decisions: launch moves to 14 October; Priya owns the pricing page; the beta stays invite-only.<attachment id=\"19:meeting-0002@thread.v2\"></attachment>"
+      },
+      "attachments": [],
+      "links": [],
+      "mentions": []
+    },
+    {
+      "id": "1788000000007",
+      "sessionId": "word-doc-0003",
+      "requestId": "req-4",
+      "appClass": "IPM.SkypeTeams.Message.Copilot.Word",
+      "interactionType": "userPrompt",
+      "conversationType": "appchat",
+      "etag": "1788000000007",
+      "createdDateTime": "2026-08-07T11:00:00.000Z",
+      "locale": "en-us",
+      "contexts": [],
+      "from": {
+        "@odata.type": "#microsoft.graph.chatMessageFromIdentitySet",
+        "device": null,
+        "user": {
+          "id": "user-0001",
+          "displayName": "Example User",
+          "userIdentityType": "aadUser"
+        },
+        "application": null
+      },
+      "body": {
+        "contentType": "text",
+        "content": "Rewrite this paragraph to be more concise"
+      },
+      "attachments": [],
+      "links": [],
+      "mentions": []
+    },
+    {
+      "id": "1788000000008",
+      "sessionId": "word-doc-0003",
+      "requestId": "req-4",
+      "appClass": "IPM.SkypeTeams.Message.Copilot.Word",
+      "interactionType": "aiResponse",
+      "conversationType": "appchat",
+      "etag": "1788000000008",
+      "createdDateTime": "2026-08-07T11:00:04.000Z",
+      "locale": "en-us",
+      "contexts": [],
+      "from": {
+        "@odata.type": "#microsoft.graph.chatMessageFromIdentitySet",
+        "device": null,
+        "user": null,
+        "application": {
+          "id": "app-0001",
+          "displayName": "Microsoft 365 Chat",
+          "applicationIdentityType": "bot"
+        }
+      },
+      "body": {
+        "contentType": "html",
+        "content": "<p>We will launch on <b>14 October</b>, with pricing owned by the growth team.</p>"
+      },
+      "attachments": [],
+      "links": [],
+      "mentions": []
+    }
+  ]
+}

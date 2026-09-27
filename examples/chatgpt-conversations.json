@@ -1,0 +1,215 @@
+[
+  {
+    "title": "Kanban vs Scrum",
+    "create_time": 1783706400.0,
+    "update_time": 1783706700.0,
+    "conversation_id": "gpt-0001",
+    "default_model_slug": "gpt-4o",
+    "current_node": "a2",
+    "mapping": {
+      "root": {
+        "id": "root",
+        "parent": null,
+        "children": [
+          "sys"
+        ],
+        "message": null
+      },
+      "sys": {
+        "id": "sys",
+        "parent": "root",
+        "children": [
+          "u1"
+        ],
+        "message": {
+          "id": "sys",
+          "author": {
+            "role": "system"
+          },
+          "create_time": null,
+          "metadata": {
+            "is_visually_hidden_from_conversation": true
+          },
+          "content": {
+            "content_type": "text",
+            "parts": [
+              ""
+            ]
+          }
+        }
+      },
+      "u1": {
+        "id": "u1",
+        "parent": "sys",
+        "children": [
+          "a1-old",
+          "a1"
+        ],
+        "message": {
+          "id": "u1",
+          "author": {
+            "role": "user"
+          },
+          "create_time": 1783706400.0,
+          "metadata": {},
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Kanban or Scrum for a four-person team?"
+            ]
+          }
+        }
+      },
+      "a1-old": {
+        "id": "a1-old",
+        "parent": "u1",
+        "children": [],
+        "message": {
+          "id": "a1-old",
+          "author": {
+            "role": "assistant"
+          },
+          "create_time": 1783706420.0,
+          "metadata": {
+            "model_slug": "gpt-4o"
+          },
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "(abandoned first answer — not counted)"
+            ]
+          }
+        }
+      },
+      "a1": {
+        "id": "a1",
+        "parent": "u1",
+        "children": [
+          "u2"
+        ],
+        "message": {
+          "id": "a1",
+          "author": {
+            "role": "assistant"
+          },
+          "create_time": 1783706460.0,
+          "metadata": {
+            "model_slug": "gpt-4o"
+          },
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Kanban: with four people, fixed sprints add overhead without much benefit."
+            ]
+          }
+        }
+      },
+      "u2": {
+        "id": "u2",
+        "parent": "a1",
+        "children": [
+          "a2"
+        ],
+        "message": {
+          "id": "u2",
+          "author": {
+            "role": "user"
+          },
+          "create_time": 1783706640.0,
+          "metadata": {},
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Thanks, that's helpful."
+            ]
+          }
+        }
+      },
+      "a2": {
+        "id": "a2",
+        "parent": "u2",
+        "children": [],
+        "message": {
+          "id": "a2",
+          "author": {
+            "role": "assistant"
+          },
+          "create_time": 1783706660.0,
+          "metadata": {
+            "model_slug": "gpt-4o"
+          },
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Happy to help."
+            ]
+          }
+        }
+      }
+    }
+  },
+  {
+    "title": "Read this chart",
+    "create_time": 1784224800.0,
+    "update_time": 1784224920.0,
+    "conversation_id": "gpt-0002",
+    "default_model_slug": "gpt-4o",
+    "current_node": "b2",
+    "mapping": {
+      "root": {
+        "id": "root",
+        "parent": null,
+        "children": [
+          "b1"
+        ],
+        "message": null
+      },
+      "b1": {
+        "id": "b1",
+        "parent": "root",
+        "children": [
+          "b2"
+        ],
+        "message": {
+          "id": "b1",
+          "author": {
+            "role": "user"
+          },
+          "create_time": 1784224800.0,
+          "metadata": {},
+          "content": {
+            "content_type": "text",
+            "parts": [
+              {
+                "content_type": "image_asset_pointer",
+                "asset_pointer": "file-service://example"
+              },
+              "What does this chart show?"
+            ]
+          }
+        }
+      },
+      "b2": {
+        "id": "b2",
+        "parent": "b1",
+        "children": [],
+        "message": {
+          "id": "b2",
+          "author": {
+            "role": "assistant"
+          },
+          "create_time": 1784224840.0,
+          "metadata": {
+            "model_slug": "gpt-4o"
+          },
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "It shows monthly revenue rising from April to July."
+            ]
+          }
+        }
+      }
+    }
+  }
+]

@@ -1,0 +1,238 @@
+/* ==========================================================================
+   Signal Lens — design tokens, themes, base typography
+   The UI itself is monochrome; color is reserved for data. "You" is always
+   --you (blue) and "Claude"/"Assistant" always --claude (orange), everywhere.
+   Data hues are the dataviz reference palette, validated for color-vision
+   deficiency in both modes (light and dark steps are separately chosen).
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+
+  --font-display: "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "DM Mono", ui-monospace, "Cascadia Mono", Menlo, monospace;
+
+  /* surfaces & ink */
+  --page: #f2f4f7;
+  --surface: #ffffff;
+  --surface-2: #f6f7f9;
+  --surface-3: #eceff3;
+  --ink: #0e1116;
+  --ink-2: #4a515c;
+  --muted: #737a86;
+  --line: #e2e5ea;
+  --line-strong: #c9ced6;
+  --grid: #eceef1;
+  --axis: #c9ced6;
+  --inverse: #0e1116;
+  --inverse-ink: #ffffff;
+  --focus: #2a78d6;
+
+  /* The one UI accent for interactive chrome (buttons, an active insight tile) —
+     deliberately distinct from --claude (chart identity, never repurposed as UI
+     chrome). Verified 4.75:1 as text on --page, 5.24:1 as white-on-fill. */
+  --accent: #b34e09;
+  --accent-ink: #ffffff;
+
+  /* data: categorical slots in fixed order (never cycled) */
+  --you: #2a78d6;
+  --claude: #eb6834;
+  --s3: #1baf7a;
+  --s4: #eda100;
+  --s5: #e87ba4;
+  --s6: #008300;
+  --s7: #4a3aa7;
+  --s8: #e34948;
+
+  /* sequential (one hue, near-surface = near zero) */
+  --seq-0: #f0f2f5;
+  --seq-1: #cde2fb;
+  --seq-2: #9ec5f4;
+  --seq-3: #6da7ec;
+  --seq-4: #3987e5;
+  --seq-5: #256abf;
+  --seq-6: #184f95;
+
+  /* status — reserved, always paired with an icon/label */
+  --good: #0ca30c;
+  --good-ink: #006300;
+  --warning: #fab219;
+  --serious: #ec835a;
+  --critical: #d03b3b;
+  --critical-ink: #b3261e;
+
+  /* sticky notes */
+  --note-yellow: #fff1b8;
+  --note-blue: #dcebff;
+  --note-pink: #ffe0ec;
+  --note-green: #dcf5e6;
+  --note-ink: #1f1a0e;
+
+  --shadow-1: 0 1px 2px rgba(14, 17, 22, 0.06);
+  --shadow-2: 0 10px 28px -12px rgba(14, 17, 22, 0.22), 0 2px 6px rgba(14, 17, 22, 0.06);
+  --shadow-3: 0 24px 60px -20px rgba(14, 17, 22, 0.35);
+
+  --r-card: 14px;
+  --r-ctl: 9px;
+  --r-chip: 999px;
+
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+
+  --gap: 16px;
+  --card-pad: 20px;
+  --topbar-h: 60px;
+  --sidebar-w: 212px;
+
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --t-fast: 140ms;
+  --t-med: 240ms;
+}
+
+/* Dark: its own selected steps, not an automatic inversion. Declared twice so the
+   OS preference applies unless the viewer explicitly chose light, and an explicit
+   dark choice wins regardless of OS. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="hc"]) {
+    color-scheme: dark;
+    --page: #0a0c0f; --surface: #14171c; --surface-2: #1a1e24; --surface-3: #232830;
+    --ink: #f3f5f8; --ink-2: #b7bdc7; --muted: #8a919d; --line: #252a31; --line-strong: #363c46;
+    --grid: #20252b; --axis: #363c46; --inverse: #f3f5f8; --inverse-ink: #0e1116; --focus: #6da7ec;
+    --accent: #ff9142; --accent-ink: #0e1116; /* 8.75:1 on --page, 8.45:1 as ink-on-fill */
+    --you: #3987e5; --claude: #d95926; --s3: #199e70; --s4: #c98500; --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767;
+    --seq-0: #1b1f25; --seq-1: #0d366b; --seq-2: #184f95; --seq-3: #256abf; --seq-4: #3987e5; --seq-5: #6da7ec; --seq-6: #b7d3f6;
+    --good-ink: #0ca30c; --critical-ink: #ff8a80;
+    --note-yellow: #4a4120; --note-blue: #1d3350; --note-pink: #4a2436; --note-green: #1e3f2c; --note-ink: #f3f5f8;
+    --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.5);
+    --shadow-2: 0 12px 30px -12px rgba(0, 0, 0, 0.7), 0 2px 6px rgba(0, 0, 0, 0.4);
+    --shadow-3: 0 24px 60px -20px rgba(0, 0, 0, 0.8);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0a0c0f; --surface: #14171c; --surface-2: #1a1e24; --surface-3: #232830;
+  --ink: #f3f5f8; --ink-2: #b7bdc7; --muted: #8a919d; --line: #252a31; --line-strong: #363c46;
+  --grid: #20252b; --axis: #363c46; --inverse: #f3f5f8; --inverse-ink: #0e1116; --focus: #6da7ec;
+  --accent: #ff9142; --accent-ink: #0e1116;
+  --you: #3987e5; --claude: #d95926; --s3: #199e70; --s4: #c98500; --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767;
+  --seq-0: #1b1f25; --seq-1: #0d366b; --seq-2: #184f95; --seq-3: #256abf; --seq-4: #3987e5; --seq-5: #6da7ec; --seq-6: #b7d3f6;
+  --good-ink: #0ca30c; --critical-ink: #ff8a80;
+  --note-yellow: #4a4120; --note-blue: #1d3350; --note-pink: #4a2436; --note-green: #1e3f2c; --note-ink: #f3f5f8;
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow-2: 0 12px 30px -12px rgba(0, 0, 0, 0.7), 0 2px 6px rgba(0, 0, 0, 0.4);
+  --shadow-3: 0 24px 60px -20px rgba(0, 0, 0, 0.8);
+}
+
+/* High contrast: black & white chrome, heavier rules, brighter data, yellow focus. */
+:root[data-theme="hc"] {
+  color-scheme: dark;
+  --page: #000; --surface: #000; --surface-2: #0a0a0a; --surface-3: #1a1a1a;
+  --ink: #fff; --ink-2: #fff; --muted: #d9d9d9; --line: #fff; --line-strong: #fff;
+  --grid: #5c5c5c; --axis: #fff; --inverse: #fff; --inverse-ink: #000; --focus: #ffd400;
+  --accent: #ffd400; --accent-ink: #000000;
+  --you: #6cb4ff; --claude: #ff9a5c; --s3: #3ee0a4; --s4: #ffd24d; --s5: #ff9cc6; --s6: #5fd35f; --s7: #b9b0ff; --s8: #ff8080;
+  --seq-0: #111; --seq-1: #123a70; --seq-2: #1d5aa8; --seq-3: #3a86e0; --seq-4: #6cb4ff; --seq-5: #a9d2ff; --seq-6: #ffffff;
+  --good-ink: #5fd35f; --critical-ink: #ff8080;
+  --note-yellow: #000; --note-blue: #000; --note-pink: #000; --note-green: #000; --note-ink: #fff;
+  --shadow-1: none; --shadow-2: none; --shadow-3: none;
+}
+:root[data-theme="hc"] .card,
+:root[data-theme="hc"] .note { border-width: 2px; }
+:root[data-theme="hc"] a { text-decoration: underline; }
+
+:root[data-density="compact"] {
+  --gap: 12px;
+  --card-pad: 14px;
+}
+
+/* ---------- reset & base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* `hidden` must win over any component's display rule (grid/flex overlays, bars). */
+[hidden] { display: none !important; }
+
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--topbar-h) + 64px); }
+
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background-color var(--t-med) var(--ease), color var(--t-med) var(--ease);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  margin: 0;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+}
+
+p { margin: 0; }
+button, input, select, textarea { font: inherit; color: inherit; }
+a { color: inherit; }
+svg { display: block; }
+img { max-width: 100%; }
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+::selection { background: color-mix(in srgb, var(--you) 28%, transparent); }
+
+.sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 12px; top: -60px;
+  z-index: 100;
+  background: var(--inverse);
+  color: var(--inverse-ink);
+  padding: 8px 14px;
+  border-radius: var(--r-ctl);
+  text-decoration: none;
+  transition: top var(--t-fast) var(--ease);
+}
+.skip-link:focus { top: 10px; }
+
+.mono { font-family: var(--font-mono); }
+.num { font-variant-numeric: tabular-nums; }
+.muted { color: var(--muted); }
+
+/* reduced motion: OS setting or explicit choice in settings */
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-motion="full"]) *,
+  :root:not([data-motion="full"]) *::before,
+  :root:not([data-motion="full"]) *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+:root[data-motion="reduce"] *,
+:root[data-motion="reduce"] *::before,
+:root[data-motion="reduce"] *::after {
+  animation-duration: 1ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 1ms !important;
+  scroll-behavior: auto !important;
+}

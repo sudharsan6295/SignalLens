@@ -1,0 +1,411 @@
+/* ==========================================================================
+   Dark-mode "control room" effects
+   Adapts the futuristic/holographic-dashboard brief into the real app,
+   accessibly: every glow is an ADDITIVE shadow/blur sitting behind text or
+   borders that already pass WCAG contrast on their own (base.css) -- it never
+   substitutes for real contrast. Every animation here relies on plain CSS
+   animation/transition, so the existing reduced-motion override in base.css
+   (prefers-reduced-motion / data-motion="reduce", which forces
+   animation-duration: 1ms on *) freezes all of it automatically with no
+   extra guard needed here. Scoped to dark mode only, in both of that themes
+   selector forms (OS-preference-dark and explicit data-theme="dark") -- a
+   glow reads as holographic against a near-black surface and simply isnt a
+   coherent idea against the light themes porcelain surfaces, so light mode
+   and the high-contrast theme are untouched.
+   ========================================================================== */
+
+/* ---------- ambient background: two soft, slow-drifting glow fields stand
+   in for "floating data streams" -- no imagery, sits behind every cards
+   opaque --surface fill so it never touches text contrast. ---------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="hc"]) body {
+    background-image:
+      radial-gradient(var(--line) 1px, transparent 1px),
+      radial-gradient(640px circle at 12% -8%, color-mix(in srgb, var(--you) 18%, transparent), transparent 60%),
+      radial-gradient(560px circle at 100% 28%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 60%);
+    background-size: 28px 28px, auto, auto;
+    background-repeat: repeat, no-repeat, no-repeat;
+    animation: lens-drift 30s ease-in-out infinite alternate;
+  }
+}
+:root[data-theme="dark"] body {
+  background-image:
+    radial-gradient(var(--line) 1px, transparent 1px),
+    radial-gradient(640px circle at 12% -8%, color-mix(in srgb, var(--you) 18%, transparent), transparent 60%),
+    radial-gradient(560px circle at 100% 28%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 60%);
+  background-size: 28px 28px, auto, auto;
+  background-repeat: repeat, no-repeat, no-repeat;
+  animation: lens-drift 30s ease-in-out infinite alternate;
+}
+@keyframes lens-drift {
+  from { background-position: 0 0, 0% 0%, 100% 28%; }
+  to   { background-position: 0 0, 6% 5%, 94% 20%; }
+}
+
+/* ---------- hero headline: solid colored text, not a highlight-marker box.
+   The light-mode background-image "highlighter" treatment (components.css)
+   looked heavy and boxy once a glow was layered on top of it in dark mode —
+   a solid, semi-opaque rectangle with a smudged halo bleeding past its own
+   edges, and an ugly seam wherever a highlighted phrase wrapped onto a new
+   line. Dark mode instead turns the box off and colors the glyphs directly:
+   cleaner, no wrap-seam, and it's what the reference image actually showed
+   (colored text, not colored boxes). Contrast-verified as real body text,
+   not just as a decorative tint: --you/--claude/--s4/--s3 all clear 5.2:1+
+   against both --page and --surface in dark mode (computed via the standard
+   WCAG relative-luminance formula), so this isn't just legible, it reads
+   easily at the hero's large size. Light mode is untouched — s3/s4 fail
+   text contrast there (as low as 1.97:1), so the safer highlight-bar stays
+   the light-mode treatment for every hl variant. ---------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="hc"]) .hero-sentence {
+    text-shadow: 0 0 18px color-mix(in srgb, var(--you) 22%, transparent);
+  }
+  :root:not([data-theme="light"]):not([data-theme="hc"]) .hero-sentence .hl,
+  :root:not([data-theme="light"]):not([data-theme="hc"]) .hero-sentence .hl-c,
+  :root:not([data-theme="light"]):not([data-theme="hc"]) .hero-sentence .hl-amber,
+  :root:not([data-theme="light"]):not([data-theme="hc"]) .hero-sentence .hl-green {
+    background-image: none;
+    padding: 0;
+  }
+  :root:not([data-theme="light"]):not([data-theme="hc"]) .hero-sentence .hl {
+    color: var(--you);
+    text-shadow: 0 0 14px color-mix(in srgb, var(--you) 50%, transparent);
+  }
+  :root:not([data-theme="light"]):not([data-theme="hc"]) .hero-sentence .hl-c {
+    color: var(--claude);
+    text-shadow: 0 0 14px color-mix(in srgb, var(--claude) 50%, transparent);
+  }
+  :root:not([data-theme="light"]):not([data-theme="hc"]) .hero-sentence .hl-amber {
+    color: var(--s4);
+    text-shadow: 0 0 14px color-mix(in srgb, var(--s4) 50%, transparent);
+  }
+  :root:not([data-theme="light"]):not([data-theme="hc"]) .hero-sentence .hl-green {
+    color: var(--s3);
+    text-shadow: 0 0 14px color-mix(in srgb, var(--s3) 50%, transparent);
+  }
+}
+:root[data-theme="dark"] .hero-sentence {
+  text-shadow: 0 0 18px color-mix(in srgb, var(--you) 22%, transparent);
+}
+:root[data-theme="dark"] .hero-sentence .hl,
+:root[data-theme="dark"] .hero-sentence .hl-c,
+:root[data-theme="dark"] .hero-sentence .hl-amber,
+:root[data-theme="dark"] .hero-sentence .hl-green {
+  background-image: none;
+  padding: 0;
+}
+:root[data-theme="dark"] .hero-sentence .hl {
+  color: var(--you);
+  text-shadow: 0 0 14px color-mix(in srgb, var(--you) 50%, transparent);
+}
+:root[data-theme="dark"] .hero-sentence .hl-c {
+  color: var(--claude);
+  text-shadow: 0 0 14px color-mix(in srgb, var(--claude) 50%, transparent);
+}
+:root[data-theme="dark"] .hero-sentence .hl-amber {
+  color: var(--s4);
+  text-shadow: 0 0 14px color-mix(in srgb, var(--s4) 50%, transparent);
+}
+:root[data-theme="dark"] .hero-sentence .hl-green {
+  color: var(--s3);
+  text-shadow: 0 0 14px color-mix(in srgb, var(--s3) 50%, transparent);
+}
+
+/* ---------- panels get a resting edge-glow, brighter on hover/focus (the
+   "power up" micro-interaction) -- applied to .card, the wrapper every
+   section panel on the site already uses, so the control-room feel reaches
+   the whole app rather than one widget. .alert-card is deliberately excluded:
+   its border color already carries real severity meaning (green/amber/red),
+   and an unrelated blue/orange glow on top would blur that signal. Static at
+   rest, not a looping pulse -- a dashboard with a dozen-plus panels on screen
+   at once (Overview alone has several) shouldn't have all of them animating
+   simultaneously; that reads as busy and pulls attention off the data itself.
+   The one deliberate looping animation in this file is the single Import-data
+   CTA further down, which is what the brief actually asked to "pulse". ---------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="hc"]) .card {
+    box-shadow: var(--shadow-1), 0 0 0 1px color-mix(in srgb, var(--you) 16%, transparent), 0 0 16px -8px color-mix(in srgb, var(--you) 40%, transparent);
+  }
+  :root:not([data-theme="light"]):not([data-theme="hc"]) .card:hover,
+  :root:not([data-theme="light"]):not([data-theme="hc"]) .card:focus-within {
+    box-shadow: var(--shadow-2), 0 0 0 1px color-mix(in srgb, var(--you) 45%, transparent), 0 0 26px -4px color-mix(in srgb, var(--you) 60%, transparent);
+  }
+  /* the AI Use Summary's insight tiles read as the site's own "data cards" --
+     a bolder, alternating blue/orange glow here matches the brief's "six
+     holographic data cards" without a fixed sparkline/animated-graph rebuild. */
+  :root:not([data-theme="light"]):not([data-theme="hc"]) .insight-tile {
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--you) 30%, transparent), 0 0 16px -6px color-mix(in srgb, var(--you) 55%, transparent);
+  }
+  :root:not([data-theme="light"]):not([data-theme="hc"]) .insight-tile:nth-child(even) {
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 30%, transparent), 0 0 16px -6px color-mix(in srgb, var(--accent) 55%, transparent);
+  }
+}
+:root[data-theme="dark"] .card {
+  box-shadow: var(--shadow-1), 0 0 0 1px color-mix(in srgb, var(--you) 16%, transparent), 0 0 16px -8px color-mix(in srgb, var(--you) 40%, transparent);
+}
+:root[data-theme="dark"] .card:hover,
+:root[data-theme="dark"] .card:focus-within {
+  box-shadow: var(--shadow-2), 0 0 0 1px color-mix(in srgb, var(--you) 45%, transparent), 0 0 26px -4px color-mix(in srgb, var(--you) 60%, transparent);
+}
+:root[data-theme="dark"] .insight-tile {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--you) 30%, transparent), 0 0 16px -6px color-mix(in srgb, var(--you) 55%, transparent);
+}
+:root[data-theme="dark"] .insight-tile:nth-child(even) {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 30%, transparent), 0 0 16px -6px color-mix(in srgb, var(--accent) 55%, transparent);
+}
+
+/* ---------- the Import-data CTA is orange and pulses gently -- the briefs
+   "orange Import Data button pulses gently, inviting engagement". Scoped to
+   the two actual "Import data" buttons (marked .btn-cta in index.html /
+   overview.js) rather than every .btn-primary on the site -- a modal's
+   internal "Choose files" button, for instance, doesn't need to invite a
+   click the visitor already committed to by opening that dialog. The fill
+   color changes too, not just the glow: pulsing an orange ring around a
+   button that's still plain black/white would read as an unrelated halo,
+   not "the orange button". Same --accent already used for the AI Use
+   Summary's own CTA (components.css), so both Import-data buttons match.
+   Outward-fading ring, same technique as the existing .pill-live .dot pulse
+   elsewhere in this app, just slower and on box-shadow instead of a dot.
+   Pauses on hover/focus so it never fights the pointer, on top of the
+   reduced-motion override in base.css. ---------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="hc"]) .btn-cta {
+    background: var(--accent);
+    color: var(--accent-ink);
+    border-color: var(--accent);
+    animation: lens-btn-pulse 2.6s ease-out infinite;
+  }
+  :root:not([data-theme="light"]):not([data-theme="hc"]) .btn-cta:hover {
+    background: color-mix(in srgb, var(--accent) 85%, black);
+    border-color: color-mix(in srgb, var(--accent) 85%, black);
+  }
+  :root:not([data-theme="light"]):not([data-theme="hc"]) .btn-cta:hover,
+  :root:not([data-theme="light"]):not([data-theme="hc"]) .btn-cta:focus-visible {
+    animation-play-state: paused;
+  }
+}
+:root[data-theme="dark"] .btn-cta {
+  background: var(--accent);
+  color: var(--accent-ink);
+  border-color: var(--accent);
+  animation: lens-btn-pulse 2.6s ease-out infinite;
+}
+:root[data-theme="dark"] .btn-cta:hover {
+  background: color-mix(in srgb, var(--accent) 85%, black);
+  border-color: color-mix(in srgb, var(--accent) 85%, black);
+}
+:root[data-theme="dark"] .btn-cta:hover,
+:root[data-theme="dark"] .btn-cta:focus-visible {
+  animation-play-state: paused;
+}
+@keyframes lens-btn-pulse {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent); }
+  70% { box-shadow: 0 0 0 10px color-mix(in srgb, var(--accent) 0%, transparent); }
+  100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 0%, transparent); }
+}
+
+/* ---------- peak-day card gets the same edge-glow language as .card ---------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="hc"]) .peak-day-card {
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--you) 30%, transparent), 0 0 18px -6px color-mix(in srgb, var(--you) 55%, transparent);
+  }
+}
+:root[data-theme="dark"] .peak-day-card {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--you) 30%, transparent), 0 0 18px -6px color-mix(in srgb, var(--you) 55%, transparent);
+}
+
+/* ---------- sidebar: the active section reads as a soft rounded, glowing pill
+   instead of the light theme's flat black/white inverse block -- closer to the
+   reference's rounded highlight, and consistent with every other glow in this
+   file. Icons are unstyled here on purpose: .nav-icon already uses
+   stroke="currentColor", so changing the link's own text color is enough to
+   recolor its icon too. ---------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="hc"]) .nav-link[aria-current="true"] {
+    background: color-mix(in srgb, var(--you) 16%, transparent);
+    color: var(--you);
+    border-radius: 12px;
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--you) 32%, transparent), 0 0 20px -6px color-mix(in srgb, var(--you) 60%, transparent);
+  }
+}
+:root[data-theme="dark"] .nav-link[aria-current="true"] {
+  background: color-mix(in srgb, var(--you) 16%, transparent);
+  color: var(--you);
+  border-radius: 12px;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--you) 32%, transparent), 0 0 20px -6px color-mix(in srgb, var(--you) 60%, transparent);
+}
+
+/* ---------- section-head icon badges get a faint resting glow, and the
+   AI Use Summary's own badge (still --accent orange, not neutral like the
+   section-head ones) gets a matching, slightly stronger one. ---------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="hc"]) .section-head-icon {
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--you) 25%, transparent), 0 0 14px -7px color-mix(in srgb, var(--you) 50%, transparent);
+  }
+  :root:not([data-theme="light"]):not([data-theme="hc"]) .ai-summary-badge {
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 35%, transparent), 0 0 16px -5px color-mix(in srgb, var(--accent) 60%, transparent);
+  }
+}
+:root[data-theme="dark"] .section-head-icon {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--you) 25%, transparent), 0 0 14px -7px color-mix(in srgb, var(--you) 50%, transparent);
+}
+:root[data-theme="dark"] .ai-summary-badge {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 35%, transparent), 0 0 16px -5px color-mix(in srgb, var(--accent) 60%, transparent);
+}
+
+/* ---------- notes: each card's own chosen color becomes a soft glow behind
+   its left accent bar -- reuses the --note-accent custom property components.css
+   already sets per data-color, so light mode's plain flat bar and dark mode's
+   glow both stay driven by the same single source of truth. ---------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="hc"]) .note {
+    box-shadow: var(--shadow-1), -6px 0 20px -14px var(--note-accent);
+  }
+  :root:not([data-theme="light"]):not([data-theme="hc"]) .note:hover,
+  :root:not([data-theme="light"]):not([data-theme="hc"]) .note:focus-within {
+    box-shadow: var(--shadow-2), -8px 0 26px -12px var(--note-accent);
+  }
+}
+:root[data-theme="dark"] .note {
+  box-shadow: var(--shadow-1), -6px 0 20px -14px var(--note-accent);
+}
+:root[data-theme="dark"] .note:hover,
+:root[data-theme="dark"] .note:focus-within {
+  box-shadow: var(--shadow-2), -8px 0 26px -12px var(--note-accent);
+}
+
+/* ---------- filter chips: same glowing-pill-when-active treatment as the
+   sidebar nav, replacing the flat black/white inverse block in dark mode. ---------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="hc"]) .chip[aria-pressed="true"] {
+    background: color-mix(in srgb, var(--you) 18%, transparent);
+    color: var(--you);
+    border-color: color-mix(in srgb, var(--you) 45%, transparent);
+    box-shadow: 0 0 14px -6px color-mix(in srgb, var(--you) 60%, transparent);
+  }
+}
+:root[data-theme="dark"] .chip[aria-pressed="true"] {
+  background: color-mix(in srgb, var(--you) 18%, transparent);
+  color: var(--you);
+  border-color: color-mix(in srgb, var(--you) 45%, transparent);
+  box-shadow: 0 0 14px -6px color-mix(in srgb, var(--you) 60%, transparent);
+}
+
+/* ---------- chart marks glow: bars, the trend line, the forecast dash, and the
+   line chart's end-dot all pick up a soft drop-shadow in their own series
+   color -- the same "lit up" idea already applied to card borders, now on the
+   data marks themselves rather than just the panels around them. ---------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="hc"]) .chart .bar {
+    filter: drop-shadow(0 0 3px color-mix(in srgb, currentColor 70%, transparent));
+  }
+  :root:not([data-theme="light"]):not([data-theme="hc"]) .chart .series-line {
+    filter: drop-shadow(0 0 4px color-mix(in srgb, currentColor 60%, transparent));
+  }
+  :root:not([data-theme="light"]):not([data-theme="hc"]) .chart .forecast-line {
+    filter: drop-shadow(0 0 4px color-mix(in srgb, currentColor 50%, transparent));
+  }
+  :root:not([data-theme="light"]):not([data-theme="hc"]) .chart .end-dot {
+    filter: drop-shadow(0 0 5px color-mix(in srgb, currentColor 80%, transparent));
+  }
+}
+:root[data-theme="dark"] .chart .bar {
+  filter: drop-shadow(0 0 3px color-mix(in srgb, currentColor 70%, transparent));
+}
+:root[data-theme="dark"] .chart .series-line {
+  filter: drop-shadow(0 0 4px color-mix(in srgb, currentColor 60%, transparent));
+}
+:root[data-theme="dark"] .chart .forecast-line {
+  filter: drop-shadow(0 0 4px color-mix(in srgb, currentColor 50%, transparent));
+}
+:root[data-theme="dark"] .chart .end-dot {
+  filter: drop-shadow(0 0 5px color-mix(in srgb, currentColor 80%, transparent));
+}
+
+/* ---------- modals (Import / Settings) get the same edge-glow as every other
+   panel -- previously untouched, so they looked flat/behind the rest of the
+   app once everything around them started glowing. ---------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="hc"]) .modal {
+    box-shadow: var(--shadow-3), 0 0 0 1px color-mix(in srgb, var(--you) 20%, transparent), 0 0 40px -12px color-mix(in srgb, var(--you) 35%, transparent);
+  }
+}
+:root[data-theme="dark"] .modal {
+  box-shadow: var(--shadow-3), 0 0 0 1px color-mix(in srgb, var(--you) 20%, transparent), 0 0 40px -12px color-mix(in srgb, var(--you) 35%, transparent);
+}
+
+/* ---------- week-callout cards (Busiest/Quietest week) get the same edge-glow
+   as the peak-day card they're styled after. ---------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="hc"]) .week-callout {
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--you) 22%, transparent), 0 0 14px -8px color-mix(in srgb, var(--you) 45%, transparent);
+  }
+  :root:not([data-theme="light"]):not([data-theme="hc"]) .week-callout.quiet {
+    box-shadow: none;
+  }
+}
+:root[data-theme="dark"] .week-callout {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--you) 22%, transparent), 0 0 14px -8px color-mix(in srgb, var(--you) 45%, transparent);
+}
+:root[data-theme="dark"] .week-callout.quiet {
+  box-shadow: none;
+}
+
+/* ---------- alert icon badges: a faint glow ring in the same severity color
+   as the badge's own tint -- consistent with every other badge in this file,
+   and still strictly the existing red/amber/green severity colors, nothing
+   decorative mixed in. ---------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="hc"]) .alert-icon.sev-bad {
+    box-shadow: 0 0 10px -3px color-mix(in srgb, var(--critical) 70%, transparent);
+  }
+  :root:not([data-theme="light"]):not([data-theme="hc"]) .alert-icon.sev-warn {
+    box-shadow: 0 0 10px -3px color-mix(in srgb, var(--warning) 70%, transparent);
+  }
+  :root:not([data-theme="light"]):not([data-theme="hc"]) .alert-icon.sev-good {
+    box-shadow: 0 0 10px -3px color-mix(in srgb, var(--good) 70%, transparent);
+  }
+}
+:root[data-theme="dark"] .alert-icon.sev-bad {
+  box-shadow: 0 0 10px -3px color-mix(in srgb, var(--critical) 70%, transparent);
+}
+:root[data-theme="dark"] .alert-icon.sev-warn {
+  box-shadow: 0 0 10px -3px color-mix(in srgb, var(--warning) 70%, transparent);
+}
+:root[data-theme="dark"] .alert-icon.sev-good {
+  box-shadow: 0 0 10px -3px color-mix(in srgb, var(--good) 70%, transparent);
+}
+
+/* ---------- focus-visible: the base.css ring (2px solid var(--focus)) is a
+   flat outline that can get lost against this file's glowing surfaces --
+   e.g. a focused nav-link already has its own blue glow, and a focused note
+   card sits next to its own colored edge-glow. A soft halo behind the same
+   outline keeps focus the most prominent thing on a glowing element without
+   changing --focus itself or how focus works anywhere else. ---------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="hc"]) :focus-visible {
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--focus) 25%, transparent);
+  }
+}
+:root[data-theme="dark"] :focus-visible {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--focus) 25%, transparent);
+}
+
+/* ---------- topbar polish: the search field's focus ring and the icon
+   buttons' hover both pick up a soft blue glow, consistent with every other
+   interactive element in this file. No glow at rest -- only on focus/hover,
+   same restraint as the rest of the header. ---------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="hc"]) .search input:focus {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 22%, transparent), 0 0 16px -4px color-mix(in srgb, var(--you) 55%, transparent);
+  }
+  :root:not([data-theme="light"]):not([data-theme="hc"]) .btn-icon:hover {
+    box-shadow: 0 0 12px -5px color-mix(in srgb, var(--you) 55%, transparent);
+  }
+}
+:root[data-theme="dark"] .search input:focus {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 22%, transparent), 0 0 16px -4px color-mix(in srgb, var(--you) 55%, transparent);
+}
+:root[data-theme="dark"] .btn-icon:hover {
+  box-shadow: 0 0 12px -5px color-mix(in srgb, var(--you) 55%, transparent);
+}

@@ -1,0 +1,80 @@
+[
+  {
+    "header": "Gemini Apps",
+    "title": "Prompted Now make the itinerary cheaper — hostels only",
+    "time": "2026-08-06T20:46:00.000Z",
+    "products": [
+      "Gemini Apps"
+    ],
+    "activityControls": [
+      "Gemini Apps Activity"
+    ],
+    "safeHtmlItem": [
+      {
+        "html": "<p>Here's a hostel-only version:</p><ul><li>Day 1: Alfama</li><li>Day 2: Belém</li></ul>"
+      }
+    ]
+  },
+  {
+    "header": "Gemini Apps",
+    "title": "Prompted Plan 3 days in Lisbon on a budget",
+    "time": "2026-08-06T20:40:00.000Z",
+    "products": [
+      "Gemini Apps"
+    ],
+    "activityControls": [
+      "Gemini Apps Activity"
+    ],
+    "safeHtmlItem": [
+      {
+        "html": "<p><b>Day 1</b> — Alfama and the castle.</p><p><b>Day 2</b> — Belém.</p><p><b>Day 3</b> — Sintra.</p>"
+      }
+    ]
+  },
+  {
+    "header": "Gemini Apps",
+    "title": "Gave feedback: Good response",
+    "time": "2026-08-06T20:47:00.000Z",
+    "products": [
+      "Gemini Apps"
+    ],
+    "activityControls": [
+      "Gemini Apps Activity"
+    ]
+  },
+  {
+    "header": "Gemini Apps",
+    "title": "Prompted That's not what I asked, I need it in pandas not SQL",
+    "time": "2026-08-04T09:14:00.000Z",
+    "products": [
+      "Gemini Apps"
+    ],
+    "activityControls": [
+      "Gemini Apps Activity"
+    ],
+    "safeHtmlItem": [
+      {
+        "html": "<p>You're right — in pandas:</p><pre><code class=\"language-python\">df.groupby(pd.Grouper(key='date', freq='W')).size()</code></pre>"
+      }
+    ]
+  },
+  {
+    "header": "Gemini Apps",
+    "title": "Prompted Count signups per week from this table",
+    "time": "2026-08-04T09:10:00.000Z",
+    "products": [
+      "Gemini Apps"
+    ],
+    "activityControls": [
+      "Gemini Apps Activity"
+    ],
+    "safeHtmlItem": [
+      {
+        "html": "<pre><code class=\"language-sql\">SELECT DATE_TRUNC('week', created_at), COUNT(*) FROM users GROUP BY 1;</code></pre>"
+      }
+    ],
+    "attachedFiles": [
+      "signups-sample.csv"
+    ]
+  }
+]
